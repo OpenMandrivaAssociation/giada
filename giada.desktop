@@ -1,0 +1,14 @@
+[Desktop Entry]
+Name=Giada
+GenericName=Drum machine and loop sequencer
+GenericName[es]=Caja de ritmos y secuenciador de loops
+GenericName[fr]=Boîte à rythme et séquenceur de boucle
+Comment=Drum machine and loop sequencer
+Comment[es]=Caja de ritmos y secuenciador de loops
+Comment[fr]=Boîte à rythme et séquenceur de boucle
+Icon=giada-logo
+Type=Application
+Exec=giada
+Terminal=false
+Categories=AudioVideo;Audio;X-Digital_Processing;X-Jack;X-MIDI;Midi;
+Keywords=midi;jackd;alsa;pulse;audio;sound;loop;
