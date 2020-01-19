@@ -37,6 +37,8 @@ control this.
 %setup -q
 
 %build
+export CC=gcc
+export CXX=g++
 ./autogen.sh
 %configure --target=linux
 %make_build
@@ -44,7 +46,7 @@ control this.
 %install
 %make_install
 
-install -Dm 0644 %{SOURCE2} %{buildroot}%{_datadir}/applications/%{name}.desktop
+install -Dm 0644 %{SOURCE1} %{buildroot}%{_datadir}/applications/%{name}.desktop
 install -p -D -m644 extras/giada-logo.png %{buildroot}%{_datadir}/icons/hicolor/150x150/apps/%{name}-logo.png
 
 %files
