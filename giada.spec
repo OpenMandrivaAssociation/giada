@@ -1,6 +1,6 @@
 Name:		giada
 Version:	0.16.0
-Release:	%mkrel 1
+Release:	1
 Summary:	Sampler Audio Tool
 License:	GPLv3+
 Group:		Sound/Utilities
@@ -8,11 +8,9 @@ URL:		https://giadamusic.com
 Source0:	https://github.com/monocasual/giada/archive/v%{version}/%{name}-%{version}.tar.gz
 Source1:	giada.svg
 Source2:	giada.desktop
-Source3:	giada.1
-Source4:	giada.fr.1
+
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	gcc-c++
 BuildRequires:	libtool
 BuildRequires:	fltk-devel
 BuildRequires:	pkgconfig(alsa)
@@ -58,5 +56,3 @@ install -Dm 0644 %{SOURCE4} %{buildroot}%{_mandir}/fr/man1/%{name}.1
 %{_bindir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_iconsdir}/hicolor/scalable/apps/%{name}.svg
-%{_mandir}/man1/%{name}.1*
-%lang(fr) %{_mandir}/fr/man1/%{name}.1*
