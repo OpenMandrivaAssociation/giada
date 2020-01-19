@@ -6,8 +6,7 @@ License:	GPLv3+
 Group:		Sound/Utilities
 URL:		https://giadamusic.com
 Source0:	https://github.com/monocasual/giada/archive/v%{version}/%{name}-%{version}.tar.gz
-Source1:	giada.svg
-Source2:	giada.desktop
+Source1:	giada.desktop
 
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -45,14 +44,12 @@ control this.
 %install
 %make_install
 
-install -Dm 0644 %{SOURCE1} %{buildroot}%{_iconsdir}/hicolor/scalable/apps/%{name}.svg
 install -Dm 0644 %{SOURCE2} %{buildroot}%{_datadir}/applications/%{name}.desktop
-install -Dm 0644 %{SOURCE3} %{buildroot}%{_mandir}/man1/%{name}.1
-install -Dm 0644 %{SOURCE4} %{buildroot}%{_mandir}/fr/man1/%{name}.1
+install -p -D -m644 extras/giada-logo.png %{buildroot}%{_datadir}/icons/hicolor/150x150/apps/%{name}-logo.png
 
 %files
 %doc ChangeLog README.md
 %license COPYING
 %{_bindir}/%{name}
 %{_datadir}/applications/%{name}.desktop
-%{_iconsdir}/hicolor/scalable/apps/%{name}.svg
+%{_datadir}/icons/hicolor/150x150/apps/%{name}-logo.png
