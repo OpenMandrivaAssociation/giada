@@ -1,6 +1,6 @@
 Name:		giada
 Version:	0.16.1
-Release:	1
+Release:	2
 Summary:	Sampler Audio Tool
 License:	GPLv3+
 Group:		Sound/Utilities
@@ -37,8 +37,10 @@ control this.
 %setup -q
 
 %build
-export CC=gcc
-export CXX=g++
+# If not set, OBJCXX is set to g++ unconditionally (and used to link).
+# Since g++ doesn't like clang++ LTO, make sure OBJCXX is set to the
+# system compiler.
+export OBJCXX=%{__cxx}
 ./autogen.sh
 %configure --target=linux
 %make_build
