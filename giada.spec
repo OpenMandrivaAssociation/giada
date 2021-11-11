@@ -8,9 +8,7 @@ URL:		https://giadamusic.com
 Source0:	https://github.com/monocasual/giada/archive/v%{version}/%{name}-%{version}.tar.gz
 Source1:	giada.desktop
 
-BuildRequires:	autoconf
-BuildRequires:	automake
-BuildRequires:	libtool
+BuildRequires:	cmake
 BuildRequires:	fltk-devel
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(jack)
@@ -41,12 +39,12 @@ control this.
 # Since g++ doesn't like clang++ LTO, make sure OBJCXX is set to the
 # system compiler.
 export OBJCXX=%{__cxx}
-./autogen.sh
-%configure --target=linux
+
+%cmake
 %make_build
 
 %install
-%make_install
+%make_install -C build
 
 install -Dm 0644 %{SOURCE1} %{buildroot}%{_datadir}/applications/%{name}.desktop
 install -p -D -m644 extras/giada-logo.png %{buildroot}%{_datadir}/icons/hicolor/150x150/apps/%{name}-logo.png
