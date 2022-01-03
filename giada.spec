@@ -41,12 +41,11 @@ control this.
 # Since g++ doesn't like clang++ LTO, make sure OBJCXX is set to the
 # system compiler.
 export OBJCXX=%{__cxx}
-./autogen.sh
-%configure --target=linux
+%cmake
 %make_build
 
 %install
-%make_install
+%make_install -C build
 
 install -Dm 0644 %{SOURCE1} %{buildroot}%{_datadir}/applications/%{name}.desktop
 install -p -D -m644 extras/giada-logo.png %{buildroot}%{_datadir}/icons/hicolor/150x150/apps/%{name}-logo.png
