@@ -43,7 +43,7 @@ control this.
 # Since g++ doesn't like clang++ LTO, make sure OBJCXX is set to the
 # system compiler.
 export OBJCXX=%{__cxx}
-%cmake
+%cmake -DWITH_SYSTEM_RtAudio
 %make_build
 
 %install
