@@ -11,6 +11,7 @@ Source1:	giada.desktop
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
+BuildRequires:  fltk-fluid
 BuildRequires:	fltk-devel
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(jack)
