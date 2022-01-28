@@ -19,6 +19,7 @@ BuildRequires:	pkgconfig(jansson) >= 2.7
 BuildRequires:	pkgconfig(libpulse)
 BuildRequires:	pkgconfig(libpulse-simple)
 BuildRequires:	pkgconfig(portaudio-2.0)
+BuildRequires:  pkgconfig(rtaudio)
 BuildRequires:	pkgconfig(rtmidi)
 BuildRequires:	pkgconfig(samplerate)
 BuildRequires:	pkgconfig(sndfile)
