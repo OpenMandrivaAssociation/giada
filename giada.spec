@@ -7,6 +7,7 @@ Group:		Sound/Utilities
 URL:		https://giadamusic.com
 Source0:	https://github.com/monocasual/giada/archive/v%{version}/%{name}-%{version}.tar.gz
 Source1:	giada.desktop
+Patch0:   giada-findFLTK.patch
 
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -36,7 +37,7 @@ machine) or loop mode (sequencer). The keyboard can be used to
 control this.
 
 %prep
-%setup -q
+%autosetup -p1
 
 %build
 # If not set, OBJCXX is set to g++ unconditionally (and used to link).
