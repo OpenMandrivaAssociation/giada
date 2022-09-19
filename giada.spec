@@ -7,7 +7,7 @@ Group:		Sound/Utilities
 URL:		https://giadamusic.com
 Source0:	https://github.com/monocasual/giada/archive/v%{version}/%{name}-%{version}.tar.gz
 Source1:	giada.desktop
-Patch0:   giada-findFLTK.patch
+#Patch0:   giada-findFLTK.patch
 
 BuildRequires:	autoconf
 BuildRequires:	automake
