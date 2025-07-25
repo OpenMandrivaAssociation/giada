@@ -13,6 +13,7 @@ Patch1:	giada-1.2.1-fmt.patch
 BuildRequires:	cmake >= 3.29
 BuildRequires:	doxygen
 BuildRequires:	texlive-latex.bin
+BuildRequires:lib64stdc++-static-devel
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(cairo)
 BuildRequires:	pkgconfig(dbus-1)
@@ -31,6 +32,7 @@ BuildRequires:	pkgconfig(libpulse)
 BuildRequires:	pkgconfig(libpulse-simple)
 BuildRequires:	pkgconfig(nlohmann_json)
 BuildRequires:	pkgconfig(opus)
+BuildRequires:	pkgconfig(pangoxft)
 BuildRequires:	pkgconfig(portaudio-2.0)
 BuildRequires:	pkgconfig(rtaudio)
 BuildRequires:	pkgconfig(rtmidi)
