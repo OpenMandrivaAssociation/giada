@@ -1,6 +1,6 @@
-Summary:	Sampler Audio Tool
+Summary:	Music production tool
 Name:	giada
-Version:	1.2.1
+Version:	1.4.0
 Release:	1
 License:	GPLv3+
 Group:	Sound/Utilities
@@ -8,11 +8,13 @@ Url:		https://giadamusic.com
 # Submodules are a pain...
 #Source0:	https://github.com/monocasual/giada/archive/v%%{version}/%%{name}-%%{version}-src.tar.gz
 Source0:	%{name}-%{version}.tar.xz
-Patch0:	giada-1.2.1-cmake-exclude-juce-and-fltk-from-all.patch
-Patch1:	giada-1.2.1-fmt.patch
+Patch0:	giada-1.4.0-cmake-exclude-juce-amd-flt-from-all.patch
+Patch1:	giada-1.4.0-fmt.patch
 BuildRequires:	cmake >= 3.29
 BuildRequires:	doxygen
+BuildRequires:	make
 BuildRequires:	texlive-latex.bin
+BuildRequires:fltk-devel
 BuildRequires:lib64stdc++-static-devel
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(cairo)
@@ -56,9 +58,18 @@ BuildRequires:	pkgconfig(xpm)
 BuildRequires:	pkgconfig(zlib)
 
 %description
-Giada is an audio tool for DJs and live performers. Up to 32 samples may be
-loaded or recorded, and may be played in single mode (drum machine) or loop
-mode (sequencer). The keyboard can be used to control this.
+Giada is an audio tool for DJs and live performers.
+The program is:
+* a loop machine: build songs in real time by layering audio tracks or MIDI
+	events;
+* a sample player: load samples and play them with a computer keyboard or a
+	MIDI controller;
+* a song editor: write songs from scratch or edit existing live recordings;
+* a live recorder: record sounds and MIDI events coming from external devices
+	or other apps;
+* an FX processor:  process samples or audio/MIDI input with VST instruments;
+* a MIDI controller: control other software or synchronize physical MIDI
+	devices by using Giada as a MIDI master sequencer.
 
 %files
 %license COPYING

@@ -1,7 +1,7 @@
-diff -rupN giada-1.2.1.old/CMakeLists.txt giada-1.2.1/CMakeLists.txt
---- giada-1.2.1.old/CMakeLists.txt	2025-07-25 15:48:15.684170500 +0200
-+++ giada-1.2.1/CMakeLists.txt	2025-07-25 17:25:58.958027311 +0200
-@@ -546,7 +546,7 @@ list(APPEND INCLUDE_DIRS ${LIBRARY_RTMID
+diff -rupN giada-1.4.0-src.old/CMakeLists.txt giada-1.4.0-src/CMakeLists.txt
+--- giada-1.4.0-src.old/CMakeLists.txt	2025-12-05 15:26:15.000000000 +0100
++++ giada-1.4.0-src/CMakeLists.txt	2026-03-24 15:20:40.077858846 +0100
+@@ -564,7 +564,7 @@ list(APPEND INCLUDE_DIRS ${LIBRARY_RTMID
  include (FetchContent)
  FetchContent_Declare(
  	FLTK
@@ -10,7 +10,7 @@ diff -rupN giada-1.2.1.old/CMakeLists.txt giada-1.2.1/CMakeLists.txt
  
  set(FLTK_BUILD_GL ON CACHE BOOL "FLTK: enable OpenGL support")
  set(FLTK_BUILD_TEST OFF CACHE BOOL "FLTK: don't build tests")
-@@ -745,7 +745,7 @@ endif()
+@@ -766,7 +766,7 @@ endif()
  # Extra parameters for audio plug-ins support.
  # ------------------------------------------------------------------------------
  

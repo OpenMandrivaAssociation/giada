@@ -1,0 +1,11 @@
+diff -rupN giada-1.4.0-src.old/src/core/engine.cpp giada-1.4.0-src/src/core/engine.cpp
+--- giada-1.4.0-src.old/src/core/engine.cpp	2025-12-05 15:26:15.000000000 +0100
++++ giada-1.4.0-src/src/core/engine.cpp	2026-03-24 15:28:03.108413637 +0100
+@@ -34,6 +34,7 @@
+ #include "src/utils/string.h"
+ #include <fmt/core.h>
+ #include <memory>
++#include <type_traits>
+ 
+ namespace giada::m
+ {
