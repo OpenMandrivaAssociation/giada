@@ -1,14 +1,14 @@
 Summary:	Music production tool
 Name:	giada
-Version:	1.4.0
+Version:	1.4.1
 Release:	1
 License:	GPLv3+
 Group:	Sound/Utilities
 Url:		https://giadamusic.com
 # Submodules are a pain...
-Source0:	https://github.com/monocasual/giada/archive/v%{version}/%{name}-%{version}-src.tar.gz
 #Source0:	%%{name}-%%{version}.tar.xz
-Patch0:	giada-1.4.0-cmake-exclude-juce-amd-flt-from-all.patch
+Source0:	https://github.com/monocasual/giada/archive/v%{version}/%{name}-%{version}-src.tar.gz
+Patch0:	giada-1.4.0-cmake-exclude-juce-and-fltk-from-all.patch
 Patch1:	giada-1.4.0-fmt.patch
 BuildRequires:	cmake >= 3.29
 BuildRequires:	doxygen
@@ -28,6 +28,7 @@ BuildRequires:	pkgconfig(glu)
 BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	pkgconfig(jack)
 BuildRequires:	pkgconfig(libcurl)
+BuildRequires:	pkgconfig(libdecor-0)
 BuildRequires:	pkgconfig(libjpeg)
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(libpulse)
