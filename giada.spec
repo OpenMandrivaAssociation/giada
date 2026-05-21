@@ -8,7 +8,7 @@ Url:		https://giadamusic.com
 # Submodules are a pain...
 #Source0:	%%{name}-%%{version}.tar.xz
 Source0:	https://github.com/monocasual/giada/archive/v%{version}/%{name}-%{version}-src.tar.gz
-#Patch0:	giada-1.4.0-cmake-exclude-juce-and-fltk-from-all.patch
+Patch0:	giada-1.4.0-cmake-exclude-juce-and-fltk-from-all.patch
 Patch1:	giada-1.4.0-fmt.patch
 BuildRequires:	cmake >= 3.29
 BuildRequires:	doxygen
