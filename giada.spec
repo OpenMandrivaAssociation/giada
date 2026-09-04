@@ -14,7 +14,8 @@ BuildRequires:	cmake >= 3.29
 BuildRequires:	doxygen
 BuildRequires:	make
 BuildRequires:	texlive-latex.bin
-BuildRequires:fltk-devel
+BuildRequires:	fltk-devel
+BuildRequires:	fltk-fluid
 BuildRequires:lib64stdc++-static-devel
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(cairo)
