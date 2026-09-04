@@ -84,6 +84,24 @@ The program is:
 
 %prep
 %autosetup -p1 -n %{name}-%{version}
+# 1.5.0 tarball has an empty fltk submodule; ABF has no network for FetchContent.
+# Use the system FLTK we already BuildRequire.
+python - <<'PY'
+from pathlib import Path
+import re
+p = Path("CMakeLists.txt")
+t = p.read_text()
+t2, n = re.subn(
+    r"include \(FetchContent\)\s*FetchContent_Declare\(\s*FLTK.*?FetchContent_MakeAvailable\(FLTK\)",
+    "find_package(FLTK REQUIRED)",
+    t,
+    count=1,
+    flags=re.S,
+)
+if n != 1:
+    raise SystemExit(f"FLTK FetchContent block not found (n={n})")
+p.write_text(t2)
+PY
 
 
 %build
