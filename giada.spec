@@ -5,9 +5,10 @@ Release:	1
 License:	GPLv3+
 Group:	Sound/Utilities
 Url:		https://giadamusic.com
-# Submodules are a pain...
+# GitHub archive has empty submodule dirs. JUCE + header-only deps are Source1.
 #Source0:	%%{name}-%%{version}.tar.xz
 Source0:	https://github.com/monocasual/giada/archive/v%{version}/%{name}-%{version}-src.tar.gz
+Source1:	giada-1.5.0-deps.tar.xz
 Patch0:	giada-1.4.0-cmake-exclude-juce-and-fltk-from-all.patch
 Patch1:	giada-1.4.0-fmt.patch
 BuildRequires:	cmake >= 3.29
@@ -85,8 +86,17 @@ The program is:
 
 %prep
 %autosetup -p1 -n %{name}-%{version}
+# 1.5.0 GitHub tarball has empty submodule dirs; unpack the pinned deps.
+tar -xJf %{S:1}
+# tarball root is giada-deps/{juce,geompp,...}
+for dep in juce geompp mcl-audio-buffer mcl-atomic-swapper concurrentqueue mcl-utils rtaudio; do
+	rm -rf src/deps/$dep
+	mv giada-deps/$dep src/deps/
+done
+rm -rf giada-deps
 # 1.5.0 tarball has an empty fltk submodule; ABF has no network for FetchContent.
-# Use the system FLTK we already BuildRequire.
+# Use the system FLTK we already BuildRequire. find_package MODULE sets
+# FLTK_LIBRARIES, not fltk::fltk, and there is no 'fltk' cmake target.
 python - <<'PY'
 from pathlib import Path
 import re
@@ -101,6 +111,22 @@ t2, n = re.subn(
 )
 if n != 1:
     raise SystemExit(f"FLTK FetchContent block not found (n={n})")
+t2, n = re.subn(
+    r"list\(APPEND LIBRARIES fltk::fltk fltk::images\)",
+    "list(APPEND LIBRARIES ${FLTK_LIBRARIES})",
+    t2,
+    count=1,
+)
+if n != 1:
+    raise SystemExit(f"fltk::fltk libraries line not found (n={n})")
+t2, n = re.subn(
+    r"add_dependencies\(giada fltk\)[^\n]*\n",
+    "",
+    t2,
+    count=1,
+)
+if n != 1:
+    raise SystemExit(f"add_dependencies(giada fltk) not found (n={n})")
 p.write_text(t2)
 PY
 
