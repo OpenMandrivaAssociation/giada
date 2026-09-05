@@ -129,6 +129,27 @@ if n != 1:
     raise SystemExit(f"add_dependencies(giada fltk) not found (n={n})")
 p.write_text(t2)
 PY
+# fmt 12: fmt::format is no longer provided by fmt/core.h
+python - <<'PY'
+from pathlib import Path
+changed = 0
+for p in Path("src").rglob("*"):
+    if p.suffix not in {".cpp", ".h", ".hpp"}:
+        continue
+    t = p.read_text(errors="replace")
+    if "fmt::format" not in t:
+        continue
+    if "fmt/format.h" in t:
+        continue
+    if "#include <fmt/core.h>" in t:
+        p.write_text(t.replace("#include <fmt/core.h>", "#include <fmt/format.h>", 1))
+    else:
+        p.write_text("#include <fmt/format.h>\n" + t)
+    changed += 1
+print(f"fmt/format.h added in {changed} files")
+if changed < 1:
+    raise SystemExit("no fmt::format users found")
+PY
 
 
 %build
@@ -136,7 +157,7 @@ PY
 # Since g++ doesn't like clang++ LTO, make sure OBJCXX is set to the
 # system compiler.
 export OBJCXX=%{__cxx}
-%cmake -DWITH_TESTS=OFF -DWITH_VST=OFF -DWITH_VST3=ON -DCMAKE_CXX_FLAGS="-std=c++17 "
+%cmake -DWITH_TESTS=OFF -DWITH_VST=OFF -DWITH_VST3=ON -DCMAKE_CXX_FLAGS="-std=c++17 -DFMT_DEPRECATED_HEAVY_CORE=1 "
 %make_build -j1
 
 
