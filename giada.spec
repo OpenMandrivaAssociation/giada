@@ -1,22 +1,29 @@
+# Sometime the GitHub archive (eg 1.5.0) has empty submodule dirs.
+# Workaround: provide JUCE  JUCE + header-only deps as Source1.
+# 1.6.0 is right, though. Keep the machinery for future needs.
+%bcond_with has_empty_dirs
+
 Summary:	Music production tool
 Name:	giada
-Version:	1.5.0
+Version:	1.6.0
 Release:	1
-License:	GPLv3+
+License:	GPL-3.0-or-later
 Group:	Sound/Utilities
 Url:		https://giadamusic.com
-# GitHub archive has empty submodule dirs. JUCE + header-only deps are Source1.
 #Source0:	%%{name}-%%{version}.tar.xz
 Source0:	https://github.com/monocasual/giada/archive/v%{version}/%{name}-%{version}-src.tar.gz
 Source1:	giada-1.5.0-deps.tar.xz
+# Avoid installing JUCE and FLTK devel files
 Patch0:	giada-1.4.0-cmake-exclude-juce-and-fltk-from-all.patch
 Patch1:	giada-1.4.0-fmt.patch
+# As fmt 12, fmt::format is no longer provided by fmt/fmt_core.h
+Patch2:	giada-1.6.0-fix-missing-fmt_format-header.patch
 BuildRequires:	cmake >= 3.29
 BuildRequires:	doxygen
+BuildRequires:	fltk-fluid
 BuildRequires:	make
 BuildRequires:	texlive-latex.bin
 BuildRequires:	fltk-devel
-BuildRequires:	fltk-fluid
 BuildRequires:lib64stdc++-static-devel
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(cairo)
@@ -41,12 +48,13 @@ BuildRequires:	pkgconfig(pangoxft)
 BuildRequires:	pkgconfig(portaudio-2.0)
 BuildRequires:	pkgconfig(rtaudio)
 BuildRequires:	pkgconfig(rtmidi)
+BuildRequires:	pkgconfig(rubberband)
 BuildRequires:	pkgconfig(samplerate)
 BuildRequires:	pkgconfig(sndfile)
 BuildRequires:	pkgconfig(vorbis)
 BuildRequires:	pkgconfig(vorbisenc)
 BuildRequires:	pkgconfig(vst3sdk)
-BuildRequires:	pkgconfig(wayland-client) >= 1.18
+BuildRequires:	pkgconfig(wayland-client) >= 1.26.0
 BuildRequires:	pkgconfig(wayland-cursor)
 BuildRequires:	pkgconfig(wayland-egl)
 BuildRequires:	pkgconfig(wayland-protocols) >= 1.15
@@ -85,7 +93,9 @@ The program is:
 #-----------------------------------------------------------------------------
 
 %prep
-%autosetup -p1 -n %{name}-%{version}
+%autosetup -p1 -n %{name}-%{version}-src
+
+%if %{with has_empty_dirs}
 # 1.5.0 GitHub tarball has empty submodule dirs; unpack the pinned deps.
 tar -xJf %{S:1}
 # tarball root is giada-deps/{juce,geompp,...}
@@ -94,8 +104,9 @@ for dep in juce geompp mcl-audio-buffer mcl-atomic-swapper concurrentqueue mcl-u
 	mv giada-deps/$dep src/deps/
 done
 rm -rf giada-deps
-# 1.5.0 tarball has an empty fltk submodule; ABF has no network for FetchContent.
-# Use the system FLTK we already BuildRequire. find_package MODULE sets
+%endif
+
+# Use the system FLTK (we already BuildRequires it). find_package MODULE sets
 # FLTK_LIBRARIES, not fltk::fltk, and there is no 'fltk' cmake target.
 python - <<'PY'
 from pathlib import Path
@@ -129,6 +140,8 @@ if n != 1:
     raise SystemExit(f"add_dependencies(giada fltk) not found (n={n})")
 p.write_text(t2)
 PY
+
+%if 0
 # fmt 12: fmt::format is no longer provided by fmt/core.h
 python - <<'PY'
 from pathlib import Path
@@ -150,6 +163,7 @@ print(f"fmt/format.h added in {changed} files")
 if changed < 1:
     raise SystemExit("no fmt::format users found")
 PY
+%endif
 
 
 %build
@@ -158,7 +172,7 @@ PY
 # system compiler.
 export OBJCXX=%{__cxx}
 %cmake -DWITH_TESTS=OFF -DWITH_VST=OFF -DWITH_VST3=ON -DCMAKE_CXX_FLAGS="-std=c++17 -DFMT_DEPRECATED_HEAVY_CORE=1 "
-%make_build -j1
+%make_build
 
 
 %install

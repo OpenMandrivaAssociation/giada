@@ -1,0 +1,329 @@
+diff -rupN giada-1.6.0-src.old/src/core/wave.cpp giada-1.6.0-src/src/core/wave.cpp
+--- giada-1.6.0-src.old/src/core/wave.cpp	2026-09-21 15:56:07.000000000 +0200
++++ giada-1.6.0-src/src/core/wave.cpp	2026-11-16 16:30:38.551955594 +0100
+@@ -28,6 +28,7 @@
+ #include "src/deps/mcl-utils/src/fs.hpp"
+ #include <cassert>
+ #include <fmt/core.h>
++#include <fmt/format.h>
+ 
+ namespace utils = mcl::utils;
+ 
+diff -rupN giada-1.6.0-src.old/src/glue/config.cpp giada-1.6.0-src/src/glue/config.cpp
+--- giada-1.6.0-src.old/src/glue/config.cpp	2026-09-21 15:56:07.000000000 +0200
++++ giada-1.6.0-src/src/glue/config.cpp	2026-11-16 16:30:59.720604281 +0100
+@@ -38,6 +38,7 @@
+ #include "src/gui/ui.h"
+ #include "src/utils/fs.h"
+ #include <fmt/core.h>
++#include <fmt/format.h>
+ 
+ extern giada::v::Ui*     g_ui;
+ extern giada::m::Engine* g_engine;
+diff -rupN giada-1.6.0-src.old/src/gui/dialogs/about.cpp giada-1.6.0-src/src/gui/dialogs/about.cpp
+--- giada-1.6.0-src.old/src/gui/dialogs/about.cpp	2026-09-21 15:56:07.000000000 +0200
++++ giada-1.6.0-src/src/gui/dialogs/about.cpp	2026-11-16 16:31:41.297348916 +0100
+@@ -33,6 +33,7 @@
+ #include "src/utils/gui.h"
+ #include "src/utils/string.h"
+ #include <fmt/core.h>
++#include <fmt/format.h>
+ 
+ extern giada::v::Ui* g_ui;
+ 
+@@ -96,4 +97,4 @@ gdAbout::gdAbout()
+ 	set_modal();
+ 	show();
+ }
+-} // namespace giada::v
+\ Manca newline alla fine del file
++} // namespace giada::v
+diff -rupN giada-1.6.0-src.old/src/gui/dialogs/actionEditor/baseActionEditor.cpp giada-1.6.0-src/src/gui/dialogs/actionEditor/baseActionEditor.cpp
+--- giada-1.6.0-src.old/src/gui/dialogs/actionEditor/baseActionEditor.cpp	2026-09-21 15:56:07.000000000 +0200
++++ giada-1.6.0-src/src/gui/dialogs/actionEditor/baseActionEditor.cpp	2026-11-16 16:31:25.673087735 +0100
+@@ -44,6 +44,7 @@
+ #include <FL/fl_draw.H>
+ #include <cassert>
+ #include <fmt/core.h>
++#include <fmt/format.h>
+ #include <limits>
+ #include <string>
+ 
+@@ -222,4 +223,4 @@ Pixel gdBaseActionEditor::currentTickToP
+ {
+ 	return (tickToPixel(m_data.getCurrentTick()) + m_splitScroll->x()) - m_splitScroll->getScrollX();
+ }
+-} // namespace giada::v
+\ Manca newline alla fine del file
++} // namespace giada::v
+diff -rupN giada-1.6.0-src.old/src/gui/dialogs/bpmInput.cpp giada-1.6.0-src/src/gui/dialogs/bpmInput.cpp
+--- giada-1.6.0-src.old/src/gui/dialogs/bpmInput.cpp	2026-09-21 15:56:07.000000000 +0200
++++ giada-1.6.0-src/src/gui/dialogs/bpmInput.cpp	2026-11-16 16:31:56.473802362 +0100
+@@ -34,6 +34,7 @@
+ #include "src/utils/gui.h"
+ #include <cstring>
+ #include <fmt/core.h>
++#include <fmt/format.h>
+ 
+ extern giada::v::Ui* g_ui;
+ 
+@@ -72,4 +73,4 @@ gdBpmInput::gdBpmInput(float value)
+ 	set_modal();
+ 	show();
+ }
+-} // namespace giada::v
+\ Manca newline alla fine del file
++} // namespace giada::v
+diff -rupN giada-1.6.0-src.old/src/gui/dialogs/channelRouting.cpp giada-1.6.0-src/src/gui/dialogs/channelRouting.cpp
+--- giada-1.6.0-src.old/src/gui/dialogs/channelRouting.cpp	2026-09-21 15:56:07.000000000 +0200
++++ giada-1.6.0-src/src/gui/dialogs/channelRouting.cpp	2026-11-16 16:32:12.905961169 +0100
+@@ -38,6 +38,7 @@
+ #include "src/gui/ui.h"
+ #include "src/utils/gui.h"
+ #include <fmt/core.h>
++#include <fmt/format.h>
+ #include <ranges>
+ 
+ extern giada::v::Ui* g_ui;
+@@ -169,4 +170,4 @@ void gdChannelRouting::rebuild()
+ 	for (const int offset : m_data.extraOutputs)
+ 		m_outputs->addWidget(new geOutput(makeOutputName(m_data.outputDeviceName, offset, m_data.outputMaxNumChannels), m_data.id, i++));
+ }
+-} // namespace giada::v
+\ Manca newline alla fine del file
++} // namespace giada::v
+diff -rupN giada-1.6.0-src.old/src/gui/dialogs/mainWindow.cpp giada-1.6.0-src/src/gui/dialogs/mainWindow.cpp
+--- giada-1.6.0-src.old/src/gui/dialogs/mainWindow.cpp	2026-09-21 15:56:07.000000000 +0200
++++ giada-1.6.0-src/src/gui/dialogs/mainWindow.cpp	2026-11-16 16:32:26.922384790 +0100
+@@ -43,6 +43,7 @@
+ #include <FL/Fl.H>
+ #include <FL/Fl_Tooltip.H>
+ #include <fmt/core.h>
++#include <fmt/format.h>
+ 
+ extern giada::v::Ui* g_ui;
+ 
+@@ -247,4 +248,4 @@ void gdMainWindow::resize(int x, int y,
+ 	gdWindow::resize(x, y, w, h);
+ 	g_ui->model.mainWindowBounds = getBounds();
+ }
+-} // namespace giada::v
+\ Manca newline alla fine del file
++} // namespace giada::v
+diff -rupN giada-1.6.0-src.old/src/gui/dialogs/sampleEditor.cpp giada-1.6.0-src/src/gui/dialogs/sampleEditor.cpp
+--- giada-1.6.0-src.old/src/gui/dialogs/sampleEditor.cpp	2026-09-21 15:56:07.000000000 +0200
++++ giada-1.6.0-src/src/gui/dialogs/sampleEditor.cpp	2026-11-16 16:32:55.410851640 +0100
+@@ -55,6 +55,7 @@
+ #include <cassert>
+ #include <cmath>
+ #include <fmt/core.h>
++#include <fmt/format.h>
+ 
+ #if G_OS_WINDOWS
+ #undef IN
+diff -rupN giada-1.6.0-src.old/src/gui/elems/config/tabAudio.cpp giada-1.6.0-src/src/gui/elems/config/tabAudio.cpp
+--- giada-1.6.0-src.old/src/gui/elems/config/tabAudio.cpp	2026-09-21 15:56:07.000000000 +0200
++++ giada-1.6.0-src/src/gui/elems/config/tabAudio.cpp	2026-11-16 16:33:17.403634645 +0100
+@@ -36,6 +36,7 @@
+ #include "src/gui/ui.h"
+ #include "src/utils/gui.h"
+ #include <fmt/core.h>
++#include <fmt/format.h>
+ #include <string>
+ 
+ extern giada::v::Ui* g_ui;
+@@ -480,4 +481,4 @@ void geTabAudio::activateAll()
+ 	m_recTriggerLevel->activate();
+ 	m_rsmpQuality->activate();
+ }
+-} // namespace giada::v
+\ Manca newline alla fine del file
++} // namespace giada::v
+diff -rupN giada-1.6.0-src.old/src/gui/elems/config/tabPlugins.cpp giada-1.6.0-src/src/gui/elems/config/tabPlugins.cpp
+--- giada-1.6.0-src.old/src/gui/elems/config/tabPlugins.cpp	2026-09-21 15:56:07.000000000 +0200
++++ giada-1.6.0-src/src/gui/elems/config/tabPlugins.cpp	2026-11-16 16:33:35.395812498 +0100
+@@ -40,6 +40,7 @@
+ #include "src/utils/string.h"
+ #include <FL/Fl.H>
+ #include <fmt/core.h>
++#include <fmt/format.h>
+ #include <functional>
+ 
+ extern giada::v::Ui* g_ui;
+@@ -115,4 +116,4 @@ void geTabPlugins::rebuild()
+ 	m_folderPath->setValue(m_data.pluginPath);
+ 	m_folderPath->redraw();
+ }
+-} // namespace giada::v
+\ Manca newline alla fine del file
++} // namespace giada::v
+diff -rupN giada-1.6.0-src.old/src/gui/elems/mainWindow/cpuLoad.cpp giada-1.6.0-src/src/gui/elems/mainWindow/cpuLoad.cpp
+--- giada-1.6.0-src.old/src/gui/elems/mainWindow/cpuLoad.cpp	2026-09-21 15:56:07.000000000 +0200
++++ giada-1.6.0-src/src/gui/elems/mainWindow/cpuLoad.cpp	2026-11-16 16:35:14.245485962 +0100
+@@ -31,6 +31,7 @@
+ #include "src/gui/elems/basics/box.h"
+ #include "src/gui/elems/basics/progress.h"
+ #include <fmt/core.h>
++#include <fmt/format.h>
+ 
+ namespace giada::v
+ {
+diff -rupN giada-1.6.0-src.old/src/gui/elems/mainWindow/keyboard/groupChannel.cpp giada-1.6.0-src/src/gui/elems/mainWindow/keyboard/groupChannel.cpp
+--- giada-1.6.0-src.old/src/gui/elems/mainWindow/keyboard/groupChannel.cpp	2026-09-21 15:56:07.000000000 +0200
++++ giada-1.6.0-src/src/gui/elems/mainWindow/keyboard/groupChannel.cpp	2026-11-16 16:34:00.436257776 +0100
+@@ -35,6 +35,7 @@
+ #include "src/gui/graphics.h"
+ #include "src/gui/ui.h"
+ #include <fmt/core.h>
++#include <fmt/format.h>
+ 
+ extern giada::v::Ui* g_ui;
+ 
+@@ -178,4 +179,4 @@ void geGroupChannel::resize(int X, int Y
+ {
+ 	geChannel::resize(X, Y, W, H);
+ }
+-} // namespace giada::v
+\ Manca newline alla fine del file
++} // namespace giada::v
+diff -rupN giada-1.6.0-src.old/src/gui/elems/mainWindow/keyboard/midiChannelButton.cpp giada-1.6.0-src/src/gui/elems/mainWindow/keyboard/midiChannelButton.cpp
+--- giada-1.6.0-src.old/src/gui/elems/mainWindow/keyboard/midiChannelButton.cpp	2026-09-21 15:56:07.000000000 +0200
++++ giada-1.6.0-src/src/gui/elems/mainWindow/keyboard/midiChannelButton.cpp	2026-11-16 16:34:30.516815106 +0100
+@@ -27,6 +27,7 @@
+ #include "src/gui/elems/mainWindow/keyboard/midiChannelButton.h"
+ #include "src/glue/channel.h"
+ #include <fmt/core.h>
++#include <fmt/format.h>
+ 
+ namespace giada::v
+ {
+diff -rupN giada-1.6.0-src.old/src/gui/elems/mainWindow/keyboard/midiChannel.cpp giada-1.6.0-src/src/gui/elems/mainWindow/keyboard/midiChannel.cpp
+--- giada-1.6.0-src.old/src/gui/elems/mainWindow/keyboard/midiChannel.cpp	2026-09-21 15:56:07.000000000 +0200
++++ giada-1.6.0-src/src/gui/elems/mainWindow/keyboard/midiChannel.cpp	2026-11-16 16:34:16.340817035 +0100
+@@ -36,6 +36,7 @@
+ #include "src/gui/graphics.h"
+ #include "src/gui/ui.h"
+ #include <fmt/core.h>
++#include <fmt/format.h>
+ 
+ extern giada::v::Ui* g_ui;
+ 
+@@ -244,4 +245,4 @@ void geMidiChannel::resize(int X, int Y,
+ 	if (w() > BREAK_SMALL)
+ 		fx->show();
+ }
+-} // namespace giada::v
+\ Manca newline alla fine del file
++} // namespace giada::v
+diff -rupN giada-1.6.0-src.old/src/gui/elems/mainWindow/keyboard/sampleChannel.cpp giada-1.6.0-src/src/gui/elems/mainWindow/keyboard/sampleChannel.cpp
+--- giada-1.6.0-src.old/src/gui/elems/mainWindow/keyboard/sampleChannel.cpp	2026-09-21 15:56:07.000000000 +0200
++++ giada-1.6.0-src/src/gui/elems/mainWindow/keyboard/sampleChannel.cpp	2026-11-16 16:34:48.789560499 +0100
+@@ -38,6 +38,7 @@
+ #include "src/gui/graphics.h"
+ #include "src/gui/ui.h"
+ #include <fmt/core.h>
++#include <fmt/format.h>
+ 
+ extern giada::v::Ui* g_ui;
+ 
+@@ -361,4 +362,4 @@ void geSampleChannel::resize(int X, int
+ 	if (w() > BREAK_LARGE)
+ 		readActionsBtn->show();
+ }
+-} // namespace giada::v
+\ Manca newline alla fine del file
++} // namespace giada::v
+diff -rupN giada-1.6.0-src.old/src/gui/elems/mainWindow/mainTimer.cpp giada-1.6.0-src/src/gui/elems/mainWindow/mainTimer.cpp
+--- giada-1.6.0-src.old/src/gui/elems/mainWindow/mainTimer.cpp	2026-09-21 15:56:07.000000000 +0200
++++ giada-1.6.0-src/src/gui/elems/mainWindow/mainTimer.cpp	2026-11-16 16:35:27.838253608 +0100
+@@ -34,6 +34,7 @@
+ #include "src/gui/ui.h"
+ #include "src/utils/gui.h"
+ #include <fmt/core.h>
++#include <fmt/format.h>
+ 
+ extern giada::v::Ui* g_ui;
+ 
+diff -rupN giada-1.6.0-src.old/src/gui/elems/mainWindow/scenes.cpp giada-1.6.0-src/src/gui/elems/mainWindow/scenes.cpp
+--- giada-1.6.0-src.old/src/gui/elems/mainWindow/scenes.cpp	2026-09-21 15:56:07.000000000 +0200
++++ giada-1.6.0-src/src/gui/elems/mainWindow/scenes.cpp	2026-11-16 16:35:42.294049344 +0100
+@@ -32,6 +32,7 @@
+ #include "src/gui/elems/playButton.h"
+ #include "src/gui/ui.h"
+ #include <fmt/core.h>
++#include <fmt/format.h>
+ 
+ extern giada::v::Ui* g_ui;
+ 
+diff -rupN giada-1.6.0-src.old/src/gui/elems/midiIO/midiLearner.cpp giada-1.6.0-src/src/gui/elems/midiIO/midiLearner.cpp
+--- giada-1.6.0-src.old/src/gui/elems/midiIO/midiLearner.cpp	2026-09-21 15:56:07.000000000 +0200
++++ giada-1.6.0-src/src/gui/elems/midiIO/midiLearner.cpp	2026-11-16 16:36:15.263299268 +0100
+@@ -31,6 +31,7 @@
+ #include "src/gui/ui.h"
+ #include <cassert>
+ #include <fmt/core.h>
++#include <fmt/format.h>
+ 
+ extern giada::v::Ui* g_ui;
+ 
+@@ -120,4 +121,4 @@ void geMidiLearner::deactivate()
+ 	m_learnBtn->deactivate();
+ 	m_clearBtn->deactivate();
+ }
+-} // namespace giada::v
+\ Manca newline alla fine del file
++} // namespace giada::v
+diff -rupN giada-1.6.0-src.old/src/gui/elems/panTool.cpp giada-1.6.0-src/src/gui/elems/panTool.cpp
+--- giada-1.6.0-src.old/src/gui/elems/panTool.cpp	2026-09-21 15:56:07.000000000 +0200
++++ giada-1.6.0-src/src/gui/elems/panTool.cpp	2026-11-16 16:37:08.328293277 +0100
+@@ -34,6 +34,7 @@
+ #include "src/utils/string.h"
+ #include <FL/Fl.H>
+ #include <fmt/core.h>
++#include <fmt/format.h>
+ 
+ extern giada::v::Ui* g_ui;
+ 
+@@ -89,4 +90,4 @@ void gePanTool::update(float pan)
+ 		m_input->setValue(fmt::format("{} R", value));
+ 	}
+ }
+-} // namespace giada::v
+\ Manca newline alla fine del file
++} // namespace giada::v
+diff -rupN giada-1.6.0-src.old/src/gui/elems/sampleEditor/pitchTool.cpp giada-1.6.0-src/src/gui/elems/sampleEditor/pitchTool.cpp
+--- giada-1.6.0-src.old/src/gui/elems/sampleEditor/pitchTool.cpp	2026-09-21 15:56:07.000000000 +0200
++++ giada-1.6.0-src/src/gui/elems/sampleEditor/pitchTool.cpp	2026-11-16 16:36:40.943825787 +0100
+@@ -39,6 +39,7 @@
+ #include "src/gui/ui.h"
+ #include "src/utils/gui.h"
+ #include <fmt/core.h>
++#include <fmt/format.h>
+ 
+ extern giada::v::Ui* g_ui;
+ 
+@@ -184,4 +185,4 @@ void gePitchTool::spreadSampleToLength(F
+ 	}
+ }
+ 
+-} // namespace giada::v
+\ Manca newline alla fine del file
++} // namespace giada::v
+diff -rupN giada-1.6.0-src.old/src/gui/elems/volumeTool.cpp giada-1.6.0-src/src/gui/elems/volumeTool.cpp
+--- giada-1.6.0-src.old/src/gui/elems/volumeTool.cpp	2026-09-21 15:56:07.000000000 +0200
++++ giada-1.6.0-src/src/gui/elems/volumeTool.cpp	2026-11-16 16:37:25.344499609 +0100
+@@ -33,6 +33,7 @@
+ #include "src/gui/elems/basics/textButton.h"
+ #include "src/gui/ui.h"
+ #include <fmt/core.h>
++#include <fmt/format.h>
+ 
+ extern giada::v::Ui* g_ui;
+ 
+@@ -87,4 +88,4 @@ void geVolumeTool::update(float volume,
+ 	if (!fromDial)
+ 		m_dial->value(volume);
+ }
+-} // namespace giada::v
+\ Manca newline alla fine del file
++} // namespace giada::v
